@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: KingAdmin
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/fxb-admin?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    filters: mergeStat,wall,logback
+    initialSize: 5
+    maxActive: 50
+    minIdle: 5
+    maxWait: 6000
+    validationQuery: SELECT 'x'
+    testOnBorrow: true
+    testOnReturn: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+management:
+  security:
+    enabled: false #关掉安全认证
+  context-path: /management #actuator的访问路径　
+
+
+druid:
+  pool:
+    initialSize: 10
+    maxActive: 100
+    minIdle: 10
+
+
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: cn.fxbworld.entity
+  global-config:
+    id-type: 3
+    field-strategy: 2
+    auto-set-db-type: true
+    db-column-underline: true
+    refresh-mapper: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+logging:
+  config: classpath:logback-spring.xml
+  level: debug
